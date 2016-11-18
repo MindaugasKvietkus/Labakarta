@@ -1,0 +1,16 @@
+{% extends 'base.html.twig' %}
+{% block body %}
+    <div class="col-md-4" style="border: 1px solid; margin-left: 37%; margin-right: 37%; margin-top: 5%">
+        <div>
+            <label class="col-md-12" style="text-align: center">Ko norite išmokti?</label>
+            <label class="col-md-12" style="text-align: center">{{ sub_category }}</label>
+        </div>
+        <div>
+            {% for value in offer_to_learn %}
+                {# {{ value.sub_category_id.id }} #}
+                <label class="col-md-12">{{ value.userId.nameSurname }}
+                    <a class="btn btn-default" href="#" role="button">Rašyti žinutė</a></label>
+            {% endfor %}
+        </div>
+    </div>
+{% endblock %}

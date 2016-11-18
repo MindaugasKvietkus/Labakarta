@@ -1,0 +1,25 @@
+{% extends 'base.html.twig' %}
+{% block body %}
+    <div class="col-md-4" style="border: 1px solid; margin-left: 37%; margin-right: 37%; margin-top: 5%">
+        <div>
+            <label class="col-md-12" style="text-align: center">Mano paskyra</label>
+        </div>
+        <div>
+            <label class="col-md-3"><img src={{ picture }}  class="img-responsive"></label>
+            <label class="col-md-9">{{ name }}</label>
+            <label class="col-md-9">{{ email }}</label>
+            <label class="col-md-9"><a href="/user/edit/{{ id }}">Redaguoti</a></label>
+        </div>
+        <div>
+            <label class="col-md-12">Aš galiu išmokyti:</label>
+            {% for value in offer %}
+                {# {{ value.sub_category_id.id }} #}
+                <label class="col-md-12">&#9899;{{ value.subCategoryId.category }}  <a href="/delete/sub_category/{{ value.subCategoryId.id }}">Ištrinti</a></label>
+            {% endfor %}
+        </div>
+        <div>
+            <label class="col-md-12"><a href="/{{ id }}/what_i_can_teach">Pridėti naują gebėjimą</a></label>
+            <label class="col-md-12"><a href="/{{ id }}/what_you_do_want_learn">Noriu išmokti naują dalyką</a></label>
+        </div>
+    </div>
+{% endblock %}

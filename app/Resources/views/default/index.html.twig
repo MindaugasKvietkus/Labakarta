@@ -1,0 +1,10 @@
+{% extends 'base_login.html.twig' %}
+{% block body %}
+    <div class="col-md-3" style="margin-left: 37%; margin-right: 37%; margin-top: 15%">
+        <div>
+            <label class="col-md-12"><a class="btn btn-default btn-block" href={{ path('login') }} role="button">Prisijungti</a></label>
+            <label class="col-md-12" style="text-align: center">- arba -</label>
+            <label class="col-md-12"><a class="btn btn-default btn-block" href={{ path('register') }} role="button">Registruotis</a></label>
+        </div>
+    </div>
+{% endblock %}

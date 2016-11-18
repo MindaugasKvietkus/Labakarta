@@ -1,0 +1,24 @@
+{% extends 'base.html.twig' %}
+{% form_theme form 'bootstrap_3_horizontal_layout.html.twig' %}
+{% block body %}
+    <div class="col-md-5" style="border: 1px solid; margin-left: 37%; margin-right: 37%; margin-top: 5%">
+        <div>
+            <label class="col-md-12" style="text-align: center">Mano paskyra</label>
+        </div>
+        {{ form_start(form) }}
+        <div class="form-group col-md-4">
+            <label class="col-md-12">{{ form_label(form.file) }}</label>
+            <label class="col-md-12">{{ form_widget(form.file) }}</label>
+        </div>
+        <div>
+            <label class="col-md-12" >{{ form_widget(form.naujinti) }}</label>
+        </div>
+        <div style="display: none">
+            {{ form_rest(form) }}
+        </div>
+        {{ form_end(form) }}
+        <div class="form-group col-md-4">
+            <label><a href="/user/edit/{{ id }}">Atgal</a></label>
+        </div>
+    </div>
+{% endblock %}

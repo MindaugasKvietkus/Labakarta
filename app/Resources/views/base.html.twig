@@ -1,0 +1,43 @@
+    <!DOCTYPE html>
+    <html>
+        <head>
+            <meta charset="UTF-8" />
+            <title>{% block title %}Welcome!{% endblock %}</title>
+            {% block stylesheets %}{% endblock %}
+            <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
+            <link rel="stylesheet" href={{ asset("css/bootstrap.min.css") }}>
+            <link rel="stylesheet" href={{ asset("css/bootstrap-theme.min.css") }}>
+            <script type="text/javascript" src={{ asset("js/bootstrap.min.js") }}></script>
+        </head>
+        <nav class="navbar navbar-default">
+            <div class="container-fluid">
+                <!-- Brand and toggle get grouped for better mobile display -->
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <a class="navbar-brand" href="#">Laba Karta</a>
+                </div>
+
+                <!-- Collect the nav links, forms, and other content for toggling -->
+                <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1" style="float: right">
+                    <ul class="nav navbar-nav">
+                        <li><a href="#">Į pradžią</a></li>
+                        <li><a href="#">Apie projektą</a></li>
+                        <li><a href="#">Kaip naudotis</a></li>
+                        <li><a href="#">Apie mus</a></li>
+                        <li><a href="#">Kontakai</a></li>
+                        <li><a href="#">Prisijungti</a></li>
+                        <li><a href="#">Registruotis</a></li>
+                    </ul>
+                </div><!-- /.navbar-collapse -->
+            </div><!-- /.container-fluid -->
+        </nav>
+        <body>
+            {% block body %}{% endblock %}
+            {% block javascripts %}{% endblock %}
+        </body>
+    </html>

@@ -1,0 +1,19 @@
+{% extends 'base.html.twig' %}
+{% block body %}
+    <div class="col-md-6" style="border: 1px solid; margin-left: 37%; margin-right: 37%; margin-top: 5%">
+        <div>
+            <label class="col-md-12" style="text-align: center">Vartotojai</label>
+            <form action="" method="get">
+            <label><input type="text" name="name_surname"> <input type="submit" value="Ieskoti"></label>
+            </form>
+        </div>
+        <div>
+            {% for value in user %}
+                <label class="col-md-12">{{ value.nameSurname }} {{ value.email }}
+                    <a href="/admin/user/{{ value.id }}">Redaguoti</a> <a href="/admin/user/delete/{{ value.id }}">Istrinti</a></label>
+            {% endfor %}
+        </div>
+    </div>
+
+    <a href="/admin/user-list/search/">Ieskoti</a>
+{% endblock %}
