@@ -9,16 +9,21 @@
 namespace AppBundle\Form;
 
 
+use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\SearchType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
+use Symfony\Component\Form\FormBuilderInterface;
+use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 
-class AdminUserSearchForm
+class AdminUserSearchForm extends AbstractType
 {
 
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $builder->add('name_surname', TextType::class, array(
+        $builder->add('name_surname', SearchType::class, array(
             'label'=> 'VardasPavarde',
-        ))->add('email', TextType::class, array(
+        ))->add('email', SearchType::class, array(
             'label' => 'Elpastas'
         ))->add('search', SubmitType::class, array(
             'label' => 'Ieskoti'
@@ -36,7 +41,7 @@ class AdminUserSearchForm
 
     public function getName(){
 
-        return 'reset';
+        return 'search';
 
     }
 }

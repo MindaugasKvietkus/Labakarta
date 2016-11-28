@@ -9,10 +9,10 @@ use AppBundle\Entity\DatabaseOffertolearn;
 use AppBundle\Entity\DatabaseUserVariables;
 use AppBundle\Entity\RememberVariables;
 use AppBundle\Entity\ResetVariables;
-use AppBundle\Entity\UserDatabaseVariables;
 use AppBundle\Entity\UserEditVariables;
 use AppBundle\Entity\UserFileVariables;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\Filesystem\Filesystem;
 use Symfony\Component\HttpFoundation\Request;
@@ -135,8 +135,10 @@ class MainController extends Controller
 
                 $user->setNameSurname($register->name_surname);
                 $user->setEmail($register->email);
-                $user->setPassword($register->password );
-                $user->setImage("Nera");
+                $user->setPassword($register->password);
+                $user->setImage("NeraImage");
+                //$user->setGroup("NeraGroup");
+                //$user->setDate(new \DateTime('today'));
 
                 $em = $this->getDoctrine()->getManager();
 
@@ -154,6 +156,15 @@ class MainController extends Controller
                 $destination_image = $this->getParameter("set_picture").$user->getId();
                 $fs->mirror($source_image, $destination_image);
 
+                /*
+                $user = $this->getDoctrine()->getRepository("AppBundle:DatabaseUserVariables")->findOneBy(array(
+                   'id' => 'DESC'
+                ));
+
+                return $this->render("default/group.hml.twig", array(
+                   'id' => $user->getId()
+                ));
+                */
                 return $this->redirectToRoute("home");
 
             }
@@ -390,7 +401,7 @@ class MainController extends Controller
     }
 
     /**
-     * @Route(path="/user/edit/{id}", name="user_edit")
+     * @Route("/user/edit/{id}", name="user_edit")
      */
 
     public function EditProfile(Request $request, $id){
@@ -491,7 +502,7 @@ class MainController extends Controller
      * @Route (path="/admin/user-list", name="admin_user_list")
      */
 
-    public function AdminUserList(){
+    public function AdminUserList(Request $request){
 
         $user = $this->getDoctrine()->getRepository("AppBundle:DatabaseUserVariables")->findAll();
 
@@ -499,8 +510,54 @@ class MainController extends Controller
 
         $form = $this->createForm('AppBundle\Form\AdminUserSearchForm', $search_name_surname);
 
+        if ($request->getMethod() === 'POST'){
+
+            if ($form->isValid()){
+
+                //$search_name_surname->name_surname =
+                $this->redirect("/");
+
+                exit;
+                $data = $form->getData();
+                dump($data);
+
+
+
+
+                $user = $this->getDoctrine()->getRepository("AppBundle:DatabaseUserVariables")->findOneBy(array(
+                    'name_surname' => $search_name_surname->name_surname,
+                    'email' => $search_name_surname->email
+                ));
+
+                return $this->redirectToRoute('search');
+
+                /*
+                return $this->render("default/admin_search_name_surname.html.twig.html.twig", array(
+                    'form' => $form->createView(),
+                    'user' => $user
+                ));
+                */
+            }
+        }
+
         return $this->render("default/admin_user_list.html.twig", array(
+            'form' => $form->createView(),
             'user' => $user
+        ));
+    }
+
+    /**
+     * @Route (path="/admin/user-list/name", name="search")
+     */
+
+    public function adminUserSearch(){
+
+        $user = $this->getDoctrine()->getRepository("AppBundle:DatabaseUserVariables")->findOneBy(array(
+            'name_surname' => ""
+        ));
+
+        return $this->render("default/admin_search_name_surname.html.twig", array(
+            'name' => $user->getName()
         ));
     }
 
@@ -617,5 +674,33 @@ class MainController extends Controller
         $em->flush();
 
         return $this->redirectToRoute("admin_user_list");
+    }
+
+    /**
+     * @Route(path="/admin/categories", name="admin_categories")
+     */
+
+    public function adminCategories (){
+
+        $categories = $this->getDoctrine()->getRepository("AppBundle:DatabaseCategory")->findAll();
+
+        $sub_categories = $this->getDoctrine()->getRepository("AppBundle:DatabaseSubCategory")->findAll();
+
+        $categories_id = "";
+        /*
+        foreach ($categories as $value){
+            $categories_id = $value->getId();
+            echo $value->getCategory();
+            foreach ($sub_categories as $sub_value){
+                if ($categories_id = $sub_value->getCategoryId()){
+
+                }
+            }
+        }
+        */
+        return $this->render("default/admin_categories.html.twig", array(
+            'categories' => $categories,
+            'subcategories' => $sub_categories,
+        ));
     }
 }

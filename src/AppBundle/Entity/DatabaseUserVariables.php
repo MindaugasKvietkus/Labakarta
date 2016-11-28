@@ -231,4 +231,14 @@ class DatabaseUserVariables implements UserInterface, \Serializable
     {
         return $this->image;
     }
+
+    /**
+     * Get offerToLearn
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getOfferToLearn()
+    {
+        return $this->offer_to_learn;
+    }
 }

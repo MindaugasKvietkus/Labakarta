@@ -1,19 +1,39 @@
 {% extends 'base.html.twig' %}
 {% block body %}
-    <div class="col-md-6" style="border: 1px solid; margin-left: 37%; margin-right: 37%; margin-top: 5%">
-        <div>
-            <label class="col-md-12" style="text-align: center">Vartotojai</label>
-            <form action="" method="get">
-            <label><input type="text" name="name_surname"> <input type="submit" value="Ieskoti"></label>
-            </form>
+    <div class="col-lg-10" style="border: 1px solid; margin-left: 10%; margin-right: 37%; margin-top: 5%">
+        {{ form_start(form) }}
+
+
+        <div class="col-lg-12">
+            <label class="col-md-3">Vardas pavarde</label>
+            <label class="col-md-2">El. paštas</label>
+            <label class="col-md-3">Registracijos data</label>
+            <label class="col-md-2">Grupe</label>
+            <label class="col-md-2">Veiksmai</label>
+        </div>
+        <div class="col-lg-12">
+            <label class="col-md-3">{{ form_widget(form.name_surname) }}</label>
+            <label class="col-md-2">{{ form_widget(form.email) }}</label>
+            <label class="col-md-3">Nuo<input type="text" name="register_date_begin" style="width: 50px"> Iki <input type="text" name="register_date_end" style="width: 50px"></label>
+            <label class="col-md-2"><input type="text" name="group"></label>
+            <label class="col-md-2"></label>
         </div>
         <div>
-            {% for value in user %}
-                <label class="col-md-12">{{ value.nameSurname }} {{ value.email }}
-                    <a href="/admin/user/{{ value.id }}">Redaguoti</a> <a href="/admin/user/delete/{{ value.id }}">Istrinti</a></label>
-            {% endfor %}
+            <label class="col-md-12" >{{ form_widget(form.search) }}</label>
         </div>
+        {% for value in user %}
+            <div class="col-lg-12">
+                <label class="col-md-3">{{ value.nameSurname }}</label>
+                <label class="col-md-2">{{ value.email }}</label>
+                <label class="col-md-3">Registracijos data</label>
+                <label class="col-md-2">Grupe</label>
+                <label class="col-md-2"><a href="/admin/user/{{ value.id }}">Redaguoti</a> | <a href="/admin/user/delete/{{ value.id }}">Istrinti</a></label>
+            </div>
+        {% endfor %}
+        <div style="display: none">
+            {{ form_rest(form) }}
+        </div>
+        {{ form_end(form) }}
     </div>
 
-    <a href="/admin/user-list/search/">Ieskoti</a>
 {% endblock %}
