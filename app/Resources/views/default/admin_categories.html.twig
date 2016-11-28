@@ -1,0 +1,17 @@
+{{ dump(categories) }}
+{{ dump(subcategories) }}
+<div>
+    <ul>
+    {% for value in categories %}
+        <li>{{ value.category }} {{ value.id }}</li>
+        <ul>
+        {% for sub_value in subcategories %}
+            {{ dump(sub_value.categoryId.id) }}
+            {{ dump(sub_value) }}
+            <li>{{ sub_value.category }}</li>
+    {% endfor %}
+        </ul>
+    {% endfor %}
+    </ul>
+    <label></label>
+</div>
